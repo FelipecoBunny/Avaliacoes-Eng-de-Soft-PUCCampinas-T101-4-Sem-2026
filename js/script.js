@@ -27,20 +27,20 @@ function hojeSemHora() {
 // ordenadas por data e com o "status" calculado (concluida / proxima / futura)
 function prepararMateria(materia) {
   const hoje = hojeSemHora();
+  const limite = new Date(hoje);
+  limite.setDate(limite.getDate() + 7);
 
   const avaliacoes = materia.avaliacoes
     .map(a => ({ ...a, dataObj: new Date(a.data + 'T00:00:00') }))
     .sort((a, b) => a.dataObj - b.dataObj);
 
-  let jaTemProxima = false;
   avaliacoes.forEach(a => {
     if (a.dataObj < hoje) {
       a.status = 'concluida';
-    } else if (!jaTemProxima) {
-      a.status = 'proxima';
-      jaTemProxima = true;
+    } else if (a.dataObj <= limite) {
+      a.status = 'proxima'; // dentro dos próximos 7 dias -> destaque laranja
     } else {
-      a.status = 'futura';
+      a.status = 'futura'; // mais longe -> card normal com 📅
     }
   });
 
@@ -80,10 +80,12 @@ function renderSemana(materias) {
 
   container.innerHTML = daSemana.map(a => `
     <article class="semana-card">
+      <div class="semana-card__topo">
+        <span class="semana-card__avaliacao">${iconePorStatus('proxima')} ${escapeHtml(a.nome)}</span>
+        <span class="semana-card__data">${formatarData(a.dataObj)}</span>
+      </div>
       <p class="semana-card__materia">${escapeHtml(a.materiaNome)}</p>
       <p class="semana-card__professor">${escapeHtml(a.professorNome)}</p>
-      <p class="semana-card__data">${formatarData(a.dataObj)}</p>
-      <p class="semana-card__avaliacao">${escapeHtml(a.nome)}</p>
     </article>
   `).join('');
 }
