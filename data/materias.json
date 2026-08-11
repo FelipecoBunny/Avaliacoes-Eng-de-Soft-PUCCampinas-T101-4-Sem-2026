@@ -39,7 +39,7 @@
       "nome": "Noções de Calculo Diferencial e Integral",
       "professor": {
         "nome": "Maria Margarida M. de Almeida",
-        "foto": "assets/professores/marmaria-margaridaia.jpg"
+        "foto": "assets/professores/maria-margarida.jpg"
       },
       "avaliacoes": [
         {
@@ -73,7 +73,7 @@
       "nome": "Filosofia, Informatica e Sociedade",
       "professor": {
         "nome": "Marco Antônio Chabbouh Júnior",
-        "foto": "assets/professores/chabbouh.jpg"
+        "foto": "assets/professores/chabbouh.jpeg"
       },
       "avaliacoes": [
         {
@@ -90,7 +90,7 @@
       "nome": "Ideação e Validação de Produtos de Software",
       "professor": {
         "nome": "Renata Antônia Tadeu Arantes",
-        "foto": "assets/professores/renata.jpg"
+        "foto": "assets/professores/renata.jpeg"
       },
       "avaliacoes": [
         {
@@ -107,7 +107,7 @@
       "nome": "Fundamentos de Sistemas Operacionais",
       "professor": {
         "nome": "Leonardo Rezende Costa",
-        "foto": "assets/professores/leonardo.jpg"
+        "foto": "assets/professores/leonardo.jpeg"
       },
       "avaliacoes": [
         {
@@ -124,7 +124,7 @@
       "nome": "Análise e Projeto de Sistemas II",
       "professor": {
         "nome": "Fernando Ernesto Kintschner",
-        "foto": "assets/professores/fernando.jpg"
+        "foto": "assets/professores/fernando.jpeg"
       },
       "avaliacoes": [
         {
