@@ -48,9 +48,12 @@ body {
   margin: 0 0 0.4rem;
 }
 
-.subtitulo {
+.turma-info {
   color: var(--ink-soft);
   margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 main {
@@ -93,27 +96,44 @@ main {
   margin: 0;
 }
 
-.semana-card__materia {
-  font-weight: 600;
-  font-size: 0.9rem;
+.semana-card__topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
 }
 
-.semana-card__professor {
-  color: var(--ink-soft);
-  font-size: 0.8rem;
-  margin-top: 0.15rem;
+.semana-card__avaliacao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--proxima-bg);
+  color: var(--proxima);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
 }
 
 .semana-card__data {
   font-family: var(--font-mono);
-  color: var(--proxima);
-  font-size: 0.85rem;
-  margin-top: 0.5rem;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  flex-shrink: 0;
 }
 
-.semana-card__avaliacao {
+.semana-card__materia {
+  font-weight: 600;
   font-size: 0.85rem;
-  margin-top: 0.15rem;
+  margin: 0;
+}
+
+.semana-card__professor {
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  margin: 0.15rem 0 0;
 }
 
 .semana-vazia {
