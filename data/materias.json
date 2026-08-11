@@ -5,7 +5,7 @@
       "nome": "Estudos de Banco de Dados II",
       "professor": {
         "nome": "Mateus Pereira Dias",
-        "foto": "assets/professores/"
+        "foto": "assets/professores/mateus.jpg"
       },
       "avaliacoes": [
         {
@@ -22,7 +22,7 @@
       "nome": "Paradigma Programação Orientada à Objetos",
       "professor": {
         "nome": "André L. R. G. de Carvalho \"Malígno\"",
-        "foto": "assets/professores/"
+        "foto": "assets/professores/maligno.jpg"
       },
       "avaliacoes": [
         {
@@ -39,7 +39,7 @@
       "nome": "Noções de Calculo Diferencial e Integral",
       "professor": {
         "nome": "Maria Margarida M. de Almeida",
-        "foto": "assets/professores/"
+        "foto": "assets/professores/marmaria-margaridaia.jpg"
       },
       "avaliacoes": [
         {
@@ -56,7 +56,7 @@
       "nome": "Verificação e Validação de Software",
       "professor": {
         "nome": "Ivan Granja",
-        "foto": "assets/professores/"
+        "foto": "assets/professores/ivan.jpg"
       },
       "avaliacoes": [
         {
@@ -73,7 +73,7 @@
       "nome": "Filosofia, Informatica e Sociedade",
       "professor": {
         "nome": "Marco Antônio Chabbouh Júnior",
-        "foto": "assets/professores/"
+        "foto": "assets/professores/chabbouh.jpg"
       },
       "avaliacoes": [
         {
@@ -90,7 +90,7 @@
       "nome": "Ideação e Validação de Produtos de Software",
       "professor": {
         "nome": "Renata Antônia Tadeu Arantes",
-        "foto": "assets/professores/"
+        "foto": "assets/professores/renata.jpg"
       },
       "avaliacoes": [
         {
@@ -107,7 +107,7 @@
       "nome": "Fundamentos de Sistemas Operacionais",
       "professor": {
         "nome": "Leonardo Rezende Costa",
-        "foto": "assets/professores/"
+        "foto": "assets/professores/leonardo.jpg"
       },
       "avaliacoes": [
         {
@@ -124,7 +124,7 @@
       "nome": "Análise e Projeto de Sistemas II",
       "professor": {
         "nome": "Fernando Ernesto Kintschner",
-        "foto": "assets/professores/"
+        "foto": "assets/professores/fernando.jpg"
       },
       "avaliacoes": [
         {
