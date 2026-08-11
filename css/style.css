@@ -75,8 +75,10 @@ main {
   display: flex;
   gap: 0.75rem;
   overflow-x: auto;
-  padding-bottom: 0.5rem;
+  padding: 0 0.4rem 0.5rem 0;
   scroll-snap-type: x mandatory;
+  -webkit-mask-image: linear-gradient(to right, #000 94%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 94%, transparent 100%);
 }
 
 .semana-card {
