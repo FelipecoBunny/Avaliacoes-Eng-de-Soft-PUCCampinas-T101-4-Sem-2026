@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provas da Turma</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <header class="topo">
+    <h1>Provas da Turma</h1>
+    <p class="subtitulo">Datas, prazos e simulação de média — tudo num lugar só</p>
+  </header>
+
+  <main>
+    <!-- Preenchido via JS a partir do materias.json -->
+    <section class="semana" aria-label="Provas da semana">
+      <h2>Essa semana</h2>
+      <div id="semana-lista" class="semana-lista"></div>
+    </section>
+
+    <section class="materias" aria-label="Matérias">
+      <div id="materias-grid" class="materias-grid"></div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>Atualizado manualmente via <code>data/materias.json</code> — edite o arquivo e o site se atualiza sozinho.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
