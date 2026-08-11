@@ -1,48 +1,140 @@
 {
   "materias": [
     {
-      "id": "aps",
-      "nome": "Análise e Projeto de Sistemas",
+      "id": "bd2",
+      "nome": "Estudos de Banco de Dados II",
+      "professor": {
+        "nome": "Mateus Pereira Dias",
+        "foto": "assets/professores/"
+      },
+      "avaliacoes": [
+        {
+          "id": "P1",
+          "nome": "Prova 1",
+          "tipo": "prova",
+          "data": "2027-01-01"
+        }
+      ],
+      "formula": ""
+    },
+    {
+      "id": "poo",
+      "nome": "Paradigma Programação Orientada à Objetos",
+      "professor": {
+        "nome": "André L. R. G. de Carvalho \"Malígno\"",
+        "foto": "assets/professores/"
+      },
+      "avaliacoes": [
+        {
+          "id": "P1",
+          "nome": "Prova 1",
+          "tipo": "prova",
+          "data": "2027-01-01"
+        }
+      ],
+      "formula": ""
+    },
+    {
+      "id": "calc",
+      "nome": "Noções de Calculo Diferencial e Integral",
+      "professor": {
+        "nome": "Maria Margarida M. de Almeida",
+        "foto": "assets/professores/"
+      },
+      "avaliacoes": [
+        {
+          "id": "P1",
+          "nome": "Prova 1",
+          "tipo": "prova",
+          "data": "2027-01-01"
+        }
+      ],
+      "formula": ""
+    },
+    {
+      "id": "vvs",
+      "nome": "Verificação e Validação de Software",
       "professor": {
         "nome": "Ivan Granja",
-        "foto": "assets/professores/ivan-granja.jpg"
+        "foto": "assets/professores/"
       },
       "avaliacoes": [
-        { "id": "P1", "nome": "Prova 1", "tipo": "prova", "data": "2026-04-17" },
-        { "id": "P2", "nome": "Prova 2", "tipo": "prova", "data": "2026-08-14" },
-        { "id": "P3", "nome": "Prova 3", "tipo": "prova", "data": "2026-10-20" },
-        { "id": "T1", "nome": "Trabalho 1", "tipo": "trabalho", "data": "2026-09-02" }
+        {
+          "id": "P1",
+          "nome": "Prova 1",
+          "tipo": "prova",
+          "data": "2027-01-01"
+        }
       ],
-      "formula": "(P1 + P2 + P3) / 3 * 0.7 + T1 * 0.3"
+      "formula": ""
     },
     {
-      "id": "calc2",
-      "nome": "Cálculo II",
+      "id": "fis",
+      "nome": "Filosofia, Informatica e Sociedade",
       "professor": {
-        "nome": "Marina Souza",
-        "foto": "assets/professores/marina-souza.jpg"
+        "nome": "Marco Antônio Chabbouh Júnior",
+        "foto": "assets/professores/"
       },
       "avaliacoes": [
-        { "id": "P1", "nome": "Prova 1", "tipo": "prova", "data": "2026-06-10" },
-        { "id": "P2", "nome": "Prova 2", "tipo": "prova", "data": "2026-08-12" }
+        {
+          "id": "P1",
+          "nome": "Prova 1",
+          "tipo": "prova",
+          "data": "2027-01-01"
+        }
       ],
-      "formula": "(P1 + P2) / 2"
+      "formula": ""
     },
     {
-      "id": "bd",
-      "nome": "Banco de Dados",
+      "id": "idvl",
+      "nome": "Ideação e Validação de Produtos de Software",
       "professor": {
-        "nome": "Carlos Lima",
-        "foto": "assets/professores/carlos-lima.jpg"
+        "nome": "Renata Antônia Tadeu Arantes",
+        "foto": "assets/professores/"
       },
       "avaliacoes": [
-        { "id": "P1", "nome": "Prova 1", "tipo": "prova", "data": "2026-05-05" },
-        { "id": "P2", "nome": "Prova 2", "tipo": "prova", "data": "2026-07-01" },
-        { "id": "P3", "nome": "Prova 3", "tipo": "prova", "data": "2026-08-20" },
-        { "id": "T1", "nome": "Trabalho 1", "tipo": "trabalho", "data": "2026-08-25" },
-        { "id": "T2", "nome": "Trabalho 2", "tipo": "trabalho", "data": "2026-09-15" }
+        {
+          "id": "P1",
+          "nome": "Prova 1",
+          "tipo": "prova",
+          "data": "2027-01-01"
+        }
       ],
-      "formula": "(P1 + P2 + P3) / 3 * 0.6 + (T1 + T2) / 2 * 0.4"
+      "formula": ""
+    },
+    {
+      "id": "fso",
+      "nome": "Fundamentos de Sistemas Operacionais",
+      "professor": {
+        "nome": "Leonardo Rezende Costa",
+        "foto": "assets/professores/"
+      },
+      "avaliacoes": [
+        {
+          "id": "P1",
+          "nome": "Prova 1",
+          "tipo": "prova",
+          "data": "2027-01-01"
+        }
+      ],
+      "formula": ""
+    },
+    {
+      "id": "anls2",
+      "nome": "Análise e Projeto de Sistemas II",
+      "professor": {
+        "nome": "Fernando Ernesto Kintschner",
+        "foto": "assets/professores/"
+      },
+      "avaliacoes": [
+        {
+          "id": "P1",
+          "nome": "Prova 1",
+          "tipo": "prova",
+          "data": "2027-01-01"
+        }
+      ],
+      "formula": ""
     }
   ]
 }
