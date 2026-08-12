@@ -24,28 +24,28 @@
           "id": "EX1",
           "nome": "Exercício 1",
           "tipo": "exercicio",
-          "data": ""
+          "data": 0
         },
         {
           "id": "EX2",
           "nome": "Exercício 2",
           "tipo": "exercicio",
-          "data": ""
+          "data": 0
         },
         {
           "id": "EX3",
           "nome": "Exercício 3",
           "tipo": "exercicio",
-          "data": ""
+          "data": 0
         },
         {
           "id": "EX4",
           "nome": "Exercício 4",
           "tipo": "exercicio",
-          "data": ""
+          "data": 0
         }
       ],
-      "formula": "(((EX1 + EX2 + EX3 + EX4) / 4) * 0.5) + (P1 * 0.3) + (PR * 0.2)"
+      "formula": "((EX1 + EX2 + EX3 + EX4) / 4) * 0.5 + (P1 * 0.3) + (PR * 0.2)"
     },
     {
       "id": "poo",
@@ -56,13 +56,31 @@
       },
       "avaliacoes": [
         {
-          "id": "P1",
+          "id": "Pv1",
           "nome": "Prova 1",
           "tipo": "prova",
-          "data": "2027-01-01"
+          "data": ""
+        },
+        {
+          "id": "Pv2",
+          "nome": "Prova 2",
+          "tipo": "prova",
+          "data": ""
+        },
+        {
+          "id": "MTb",
+          "nome": "Média dos Trabalhos",
+          "tipo": "trabalho",
+          "data": 0
+        },
+        {
+          "id": "MA",
+          "nome": "Média das Atividades",
+          "tipo": "atividade",
+          "data": 0
         }
       ],
-      "formula": ""
+      "formula": "((Pv1*1 + Pv2*2) / 3 >= 5 && MTb >= 5 && MA >= 5) ? (0.5*((Pv1*1 + Pv2*2) / 3) + 0.3*MTb + 0.2*MA) : Math.min((Pv1*1 + Pv2*2) / 3, MTb, MA)"
     },
     {
       "id": "calc",
@@ -76,10 +94,22 @@
           "id": "P1",
           "nome": "Prova 1",
           "tipo": "prova",
-          "data": "2027-01-01"
+          "data": ""
+        },
+        {
+          "id": "P2",
+          "nome": "Prova 2",
+          "tipo": "prova",
+          "data": ""
+        },
+        {
+          "id": "AT",
+          "nome": "Atividades Teóricas (média)",
+          "tipo": "atividade",
+          "data": 0
         }
       ],
-      "formula": ""
+      "formula": "(P1 * 0.35) + (P2 * 0.50) + (AT * 0.15)"
     },
     {
       "id": "vvs",
@@ -90,13 +120,25 @@
       },
       "avaliacoes": [
         {
-          "id": "P1",
-          "nome": "Prova 1",
+          "id": "MPA",
+          "nome": "Atividades Somativas (média)",
+          "tipo": "atividade",
+          "data": 0
+        },
+        {
+          "id": "PC",
+          "nome": "Provas/Testes (média)",
           "tipo": "prova",
-          "data": "2027-01-01"
+          "data": 0
+        },
+        {
+          "id": "PI",
+          "nome": "Projeto Integrador",
+          "tipo": "projeto",
+          "data": ""
         }
       ],
-      "formula": ""
+      "formula": "(MPA * 0.4) + (PC * 0.5) + (PI * 0.1)"
     },
     {
       "id": "fis",
@@ -107,13 +149,21 @@
       },
       "avaliacoes": [
         {
-          "id": "P1",
-          "nome": "Prova 1",
+          "id": "AG",
+          "nome": "Atividades em Grupo",
+          "tipo": "atividade",
+          "data": 0,
+          "notaMaxima": 7
+        },
+        {
+          "id": "AI",
+          "nome": "Avaliação Individual",
           "tipo": "prova",
-          "data": "2027-01-01"
+          "data": "",
+          "notaMaxima": 3
         }
       ],
-      "formula": ""
+      "formula": "AG + AI"
     },
     {
       "id": "idvl",
@@ -124,13 +174,25 @@
       },
       "avaliacoes": [
         {
-          "id": "P1",
-          "nome": "Prova 1",
-          "tipo": "prova",
-          "data": "2027-01-01"
+          "id": "NA",
+          "nome": "Atividades de Sala (média)",
+          "tipo": "atividade",
+          "data": 0
+        },
+        {
+          "id": "IPI",
+          "nome": "Ideação do Projeto Integrador",
+          "tipo": "projeto",
+          "data": ""
+        },
+        {
+          "id": "PI",
+          "nome": "Pitch do Projeto Integrador",
+          "tipo": "apresentacao",
+          "data": ""
         }
       ],
-      "formula": ""
+      "formula": "(NA*0.25)+(IPI*0.5)+(PI*0.25)"
     },
     {
       "id": "fso",
@@ -144,10 +206,22 @@
           "id": "P1",
           "nome": "Prova 1",
           "tipo": "prova",
-          "data": "2027-01-01"
+          "data": ""
+        },
+        {
+          "id": "P2",
+          "nome": "Prova 2",
+          "tipo": "prova",
+          "data": ""
+        },
+        {
+          "id": "T",
+          "nome": "Trabalho Final",
+          "tipo": "trabalho",
+          "data": ""
         }
       ],
-      "formula": ""
+      "formula": "(P1*0.4)+(P2*0.4)+(T*0.2)"
     },
     {
       "id": "anls2",
@@ -158,13 +232,13 @@
       },
       "avaliacoes": [
         {
-          "id": "P1",
-          "nome": "Prova 1",
-          "tipo": "prova",
-          "data": "2027-01-01"
+          "id": "EX",
+          "nome": "Média dos Exercícios",
+          "tipo": "exercicio",
+          "data": 0
         }
       ],
-      "formula": ""
+      "formula": "EX"
     }
   ]
 }

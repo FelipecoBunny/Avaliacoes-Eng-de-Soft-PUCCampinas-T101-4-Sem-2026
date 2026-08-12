@@ -158,10 +158,12 @@ function materiaParaHtml(m) {
 }
 
 function avaliacaoParaHtml(a) {
+  const max = a.notaMaxima ?? 10;
+  const maxTexto = max !== 10 ? ` (máx ${max})` : '';
   return `
     <div class="avaliacao-row ${a.status}">
-      <span class="avaliacao-nome">${iconePorStatus(a.status)} ${escapeHtml(a.nome)}: ${textoData(a)}</span>
-      <input type="number" min="0" max="10" step="0.1" placeholder="nota" data-id="${a.id}">
+      <span class="avaliacao-nome">${iconePorStatus(a.status)} ${escapeHtml(a.nome)}${maxTexto}: ${textoData(a)}</span>
+      <input type="number" min="0" max="${max}" step="0.1" placeholder="nota" data-id="${a.id}">
     </div>
   `;
 }
@@ -203,7 +205,7 @@ function atualizarMedia(materia, card) {
     const resultado = new Function(...nomes, `return ${materia.formula};`)(...numeros);
 
     saida.textContent = resultado.toFixed(2);
-    saida.className = 'media-valor ' + (resultado >= 6 ? 'aprovado' : 'reprovando');
+    saida.className = 'media-valor ' + (resultado >= 5 ? 'aprovado' : 'reprovando');
   } catch (erro) {
     saida.textContent = 'erro na fórmula';
     saida.className = 'media-valor';
