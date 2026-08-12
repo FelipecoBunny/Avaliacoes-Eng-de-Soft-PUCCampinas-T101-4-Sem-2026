@@ -23,19 +23,43 @@ function hojeSemHora() {
   return d;
 }
 
+// Recebe o valor bruto de "data" do JSON e devolve ou um objeto Date válido,
+// ou um texto especial pra quando não tem data de verdade.
+function resolverData(bruto) {
+  if (bruto === 0 || bruto === '0') {
+    return { dataObj: null, textoEspecial: 'Sem data' };
+  }
+  if (bruto === undefined || bruto === null || bruto === '') {
+    return { dataObj: null, textoEspecial: 'Não definido' };
+  }
+  const d = new Date(bruto + 'T00:00:00');
+  if (isNaN(d.getTime())) {
+    return { dataObj: null, textoEspecial: 'Não definido' };
+  }
+  return { dataObj: d, textoEspecial: null };
+}
+
 // Recebe uma matéria do JSON e devolve com as avaliações já
-// ordenadas por data e com o "status" calculado (concluida / proxima / futura)
+// ordenadas por data (as sem data vão pro final) e com o "status"
+// calculado (concluida / proxima / futura)
 function prepararMateria(materia) {
   const hoje = hojeSemHora();
   const limite = new Date(hoje);
   limite.setDate(limite.getDate() + 7);
 
   const avaliacoes = materia.avaliacoes
-    .map(a => ({ ...a, dataObj: new Date(a.data + 'T00:00:00') }))
-    .sort((a, b) => a.dataObj - b.dataObj);
+    .map(a => ({ ...a, ...resolverData(a.data) }))
+    .sort((a, b) => {
+      if (!a.dataObj && !b.dataObj) return 0;
+      if (!a.dataObj) return 1;
+      if (!b.dataObj) return -1;
+      return a.dataObj - b.dataObj;
+    });
 
   avaliacoes.forEach(a => {
-    if (a.dataObj < hoje) {
+    if (!a.dataObj) {
+      a.status = 'futura'; // sem data conhecida -> tratada como card normal
+    } else if (a.dataObj < hoje) {
       a.status = 'concluida';
     } else if (a.dataObj <= limite) {
       a.status = 'proxima'; // dentro dos próximos 7 dias -> destaque laranja
@@ -55,6 +79,12 @@ function formatarData(dataObj) {
   return dataObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
 }
 
+// Texto de data pra exibir: usa o texto especial (Não definido / Sem data)
+// quando não há uma data válida, senão formata normalmente.
+function textoData(a) {
+  return a.textoEspecial ?? formatarData(a.dataObj);
+}
+
 // ---------- Seção "Essa semana" ----------
 function renderSemana(materias) {
   const hoje = hojeSemHora();
@@ -64,7 +94,7 @@ function renderSemana(materias) {
   const daSemana = [];
   materias.forEach(m => {
     m.avaliacoes.forEach(a => {
-      if (a.dataObj >= hoje && a.dataObj <= limite) {
+      if (a.dataObj && a.dataObj >= hoje && a.dataObj <= limite) {
         daSemana.push({ ...a, materiaNome: m.nome, professorNome: m.professor.nome });
       }
     });
@@ -121,7 +151,7 @@ function materiaParaHtml(m) {
       </div>
       <footer class="materia-card__footer">
         <span>Média simulada</span>
-        <strong class="media-valor" data-media>—</strong>
+        <strong class="media-valor" data-media>${m.formula ? '—' : 'Fórmula não definida'}</strong>
       </footer>
     </article>
   `;
@@ -130,7 +160,7 @@ function materiaParaHtml(m) {
 function avaliacaoParaHtml(a) {
   return `
     <div class="avaliacao-row ${a.status}">
-      <span class="avaliacao-nome">${iconePorStatus(a.status)} ${escapeHtml(a.nome)}: ${formatarData(a.dataObj)}</span>
+      <span class="avaliacao-nome">${iconePorStatus(a.status)} ${escapeHtml(a.nome)}: ${textoData(a)}</span>
       <input type="number" min="0" max="10" step="0.1" placeholder="nota" data-id="${a.id}">
     </div>
   `;
@@ -139,6 +169,14 @@ function avaliacaoParaHtml(a) {
 // Recalcula a média sempre que uma nota é digitada.
 // Só calcula quando TODAS as notas da matéria estiverem preenchidas.
 function atualizarMedia(materia, card) {
+  const saida = card.querySelector('[data-media]');
+
+  if (!materia.formula || materia.formula.trim() === '') {
+    saida.textContent = 'Fórmula não definida';
+    saida.className = 'media-valor';
+    return;
+  }
+
   const inputs = card.querySelectorAll('input[data-id]');
   const valores = {};
   let completo = true;
@@ -151,8 +189,6 @@ function atualizarMedia(materia, card) {
     }
     valores[input.dataset.id] = parseFloat(valor);
   });
-
-  const saida = card.querySelector('[data-media]');
 
   if (!completo) {
     saida.textContent = '—';
