@@ -3,7 +3,7 @@ const DATA_URL = 'data/materias.json';
 
 async function init() {
   try {
-    const resposta = await fetch(DATA_URL);
+    const resposta = await fetch(DATA_URL, { cache: 'no-store' });
     const dados = await resposta.json();
     const materias = dados.materias.map(prepararMateria);
 
