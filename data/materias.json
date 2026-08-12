@@ -12,10 +12,40 @@
           "id": "P1",
           "nome": "Prova 1",
           "tipo": "prova",
-          "data": "2027-01-01"
+          "data": ""
+        },
+        {
+          "id": "PR",
+          "nome": "Projeto Prático",
+          "tipo": "projeto",
+          "data": ""
+        },
+        {
+          "id": "EX1",
+          "nome": "Exercício 1",
+          "tipo": "exercicio",
+          "data": ""
+        },
+        {
+          "id": "EX2",
+          "nome": "Exercício 2",
+          "tipo": "exercicio",
+          "data": ""
+        },
+        {
+          "id": "EX3",
+          "nome": "Exercício 3",
+          "tipo": "exercicio",
+          "data": ""
+        },
+        {
+          "id": "EX4",
+          "nome": "Exercício 4",
+          "tipo": "exercicio",
+          "data": ""
         }
       ],
-      "formula": ""
+      "formula": "((EX1 + EX2 + EX3 + EX4) / 4) * 0.5) + (P1 * 0.3) + (PR * 0.2)"
     },
     {
       "id": "poo",
