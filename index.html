@@ -8,9 +8,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -19,7 +21,7 @@
 
   <header class="topo">
     <h1>Provas do Semestre</h1>
-    <p class="turma-info">Engenharia de Software · Turma 101 · 4º Semestre · 2026</p>
+    <p class="turma-info">Engenharia de Software · Turma 101 · 4º Bimestre · 2026</p>
   </header>
 
   <main>
@@ -38,6 +40,41 @@
     <p>Site auxiliar e não oficial, sem vínculo com a PUC-Campinas — feito por alunos, com apoio de IA. Sempre confirme
       datas e critérios com o professor.</p>
   </footer>
+
+  <div id="modal-overlay" class="modal-overlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+      <button type="button" id="modal-fechar" class="modal-fechar" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="6" y1="6" x2="18" y2="18" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+        </svg>
+      </button>
+
+      <header class="modal-header">
+        <img id="modal-foto" class="modal-foto" src="" alt="" onerror="this.style.display='none'">
+        <div>
+          <p class="modal-eyebrow">Simulação de notas</p>
+          <h3 id="modal-titulo"></h3>
+          <p id="modal-professor" class="modal-professor-nome"></p>
+        </div>
+      </header>
+
+      <div class="modal-corpo">
+        <div id="modal-campos" class="modal-campos"></div>
+
+        <div class="modal-media">
+          <span>Média final</span>
+          <strong id="modal-media-valor" class="modal-media-valor">—</strong>
+        </div>
+
+        <div class="modal-formula">
+          <p class="modal-formula-titulo">Fórmula</p>
+          <div id="modal-formula-katex" class="modal-formula-katex"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="js/script.js"></script>
 </body>

@@ -1,0 +1,169 @@
+{
+  "notas": [
+    {
+      "id": "bd2",
+      "variaveis": [
+        {
+          "variavel": "P1",
+          "nomeExibicao": "Prova 1"
+        },
+        {
+          "variavel": "PR",
+          "nomeExibicao": "Projeto Prático"
+        },
+        {
+          "variavel": "EX1",
+          "nomeExibicao": "Exercício 1"
+        },
+        {
+          "variavel": "EX2",
+          "nomeExibicao": "Exercício 2"
+        },
+        {
+          "variavel": "EX3",
+          "nomeExibicao": "Exercício 3"
+        },
+        {
+          "variavel": "EX4",
+          "nomeExibicao": "Exercício 4"
+        }
+      ],
+      "formula": "((EX1 + EX2 + EX3 + EX4) / 4) * 0.5 + (P1 * 0.3) + (PR * 0.2)",
+      "formulaLatex": "NF = \\dfrac{EX_1+EX_2+EX_3+EX_4}{4}\\cdot 0.5 + P_1\\cdot 0.3 + PR\\cdot 0.2"
+    },
+    {
+      "id": "poo",
+      "variaveis": [
+        {
+          "variavel": "Pv1",
+          "nomeExibicao": "Prova 1"
+        },
+        {
+          "variavel": "Pv2",
+          "nomeExibicao": "Prova 2"
+        },
+        {
+          "variavel": "MTb",
+          "nomeExibicao": "Média dos Trabalhos",
+          "expansivel": true
+        },
+        {
+          "variavel": "MA",
+          "nomeExibicao": "Média das Atividades",
+          "expansivel": true
+        }
+      ],
+      "formula": "((Pv1*1 + Pv2*2) / 3 >= 5 && MTb >= 5 && MA >= 5) ? (0.5*((Pv1*1 + Pv2*2) / 3) + 0.3*MTb + 0.2*MA) : Math.min((Pv1*1 + Pv2*2) / 3, MTb, MA)",
+      "formulaLatex": "MF = \\begin{cases} 0.5\\left(\\dfrac{Pv_1+2Pv_2}{3}\\right) + 0.3\\,MTb + 0.2\\,MA & \\text{se } \\dfrac{Pv_1+2Pv_2}{3},\\ MTb,\\ MA \\ge 5 \\\\[6pt] \\min\\!\\left(\\dfrac{Pv_1+2Pv_2}{3},\\ MTb,\\ MA\\right) & \\text{caso contrário} \\end{cases}"
+    },
+    {
+      "id": "calc",
+      "variaveis": [
+        {
+          "variavel": "P1",
+          "nomeExibicao": "Prova 1"
+        },
+        {
+          "variavel": "P2",
+          "nomeExibicao": "Prova 2"
+        },
+        {
+          "variavel": "AT",
+          "nomeExibicao": "Atividades Teóricas (média)",
+          "expansivel": true
+        }
+      ],
+      "formula": "(P1 * 0.35) + (P2 * 0.50) + (AT * 0.15)",
+      "formulaLatex": "MF = 0.35\\,P_1 + 0.50\\,P_2 + 0.15\\,AT"
+    },
+    {
+      "id": "vvs",
+      "variaveis": [
+        {
+          "variavel": "MPA",
+          "nomeExibicao": "Atividades Somativas (média)",
+          "expansivel": true
+        },
+        {
+          "variavel": "PC",
+          "nomeExibicao": "Provas/Testes (média)",
+          "expansivel": true
+        },
+        {
+          "variavel": "PI",
+          "nomeExibicao": "Projeto Integrador"
+        }
+      ],
+      "formula": "(MPA * 0.4) + (PC * 0.5) + (PI * 0.1)",
+      "formulaLatex": "MF = 0.4\\,MPA + 0.5\\,PC + 0.1\\,PI"
+    },
+    {
+      "id": "fis",
+      "variaveis": [
+        {
+          "variavel": "AG",
+          "nomeExibicao": "Atividades em Grupo",
+          "notaMaxima": 7
+        },
+        {
+          "variavel": "AI",
+          "nomeExibicao": "Avaliação Individual",
+          "notaMaxima": 3
+        }
+      ],
+      "formula": "AG + AI",
+      "formulaLatex": "MF = AG + AI"
+    },
+    {
+      "id": "idvl",
+      "variaveis": [
+        {
+          "variavel": "NA",
+          "nomeExibicao": "Atividades de Sala (média)",
+          "expansivel": true
+        },
+        {
+          "variavel": "IPI",
+          "nomeExibicao": "Ideação do Projeto Integrador"
+        },
+        {
+          "variavel": "PI",
+          "nomeExibicao": "Pitch do Projeto Integrador"
+        }
+      ],
+      "formula": "(NA*0.25)+(IPI*0.5)+(PI*0.25)",
+      "formulaLatex": "MF = 0.25\\,NA + 0.5\\,IPI + 0.25\\,PI"
+    },
+    {
+      "id": "fso",
+      "variaveis": [
+        {
+          "variavel": "P1",
+          "nomeExibicao": "Prova 1"
+        },
+        {
+          "variavel": "P2",
+          "nomeExibicao": "Prova 2"
+        },
+        {
+          "variavel": "T",
+          "nomeExibicao": "Trabalho Final"
+        }
+      ],
+      "formula": "(P1*0.4)+(P2*0.4)+(T*0.2)",
+      "formulaLatex": "MF = 0.4\\,P_1 + 0.4\\,P_2 + 0.2\\,T"
+    },
+    {
+      "id": "anls2",
+      "variaveis": [
+        {
+          "variavel": "EX",
+          "nomeExibicao": "Média dos Exercícios",
+          "expansivel": true
+        }
+      ],
+      "formula": "EX",
+      "formulaLatex": "MF = EX"
+    }
+  ]
+}

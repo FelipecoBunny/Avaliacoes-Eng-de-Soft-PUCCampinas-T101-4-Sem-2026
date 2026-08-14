@@ -44,8 +44,7 @@
           "tipo": "exercicio",
           "data": 0
         }
-      ],
-      "formula": "((EX1 + EX2 + EX3 + EX4) / 4) * 0.5 + (P1 * 0.3) + (PR * 0.2)"
+      ]
     },
     {
       "id": "poo",
@@ -79,8 +78,7 @@
           "tipo": "atividade",
           "data": 0
         }
-      ],
-      "formula": "((Pv1*1 + Pv2*2) / 3 >= 5 && MTb >= 5 && MA >= 5) ? (0.5*((Pv1*1 + Pv2*2) / 3) + 0.3*MTb + 0.2*MA) : Math.min((Pv1*1 + Pv2*2) / 3, MTb, MA)"
+      ]
     },
     {
       "id": "calc",
@@ -108,8 +106,7 @@
           "tipo": "atividade",
           "data": 0
         }
-      ],
-      "formula": "(P1 * 0.35) + (P2 * 0.50) + (AT * 0.15)"
+      ]
     },
     {
       "id": "vvs",
@@ -137,8 +134,7 @@
           "tipo": "projeto",
           "data": ""
         }
-      ],
-      "formula": "(MPA * 0.4) + (PC * 0.5) + (PI * 0.1)"
+      ]
     },
     {
       "id": "fis",
@@ -152,18 +148,15 @@
           "id": "AG",
           "nome": "Atividades em Grupo",
           "tipo": "atividade",
-          "data": 0,
-          "notaMaxima": 7
+          "data": 0
         },
         {
           "id": "AI",
           "nome": "Avaliação Individual",
           "tipo": "prova",
-          "data": "",
-          "notaMaxima": 3
+          "data": ""
         }
-      ],
-      "formula": "AG + AI"
+      ]
     },
     {
       "id": "idvl",
@@ -191,8 +184,7 @@
           "tipo": "apresentacao",
           "data": ""
         }
-      ],
-      "formula": "(NA*0.25)+(IPI*0.5)+(PI*0.25)"
+      ]
     },
     {
       "id": "fso",
@@ -220,8 +212,7 @@
           "tipo": "trabalho",
           "data": ""
         }
-      ],
-      "formula": "(P1*0.4)+(P2*0.4)+(T*0.2)"
+      ]
     },
     {
       "id": "anls2",
@@ -237,8 +228,7 @@
           "tipo": "exercicio",
           "data": 0
         }
-      ],
-      "formula": "EX"
+      ]
     }
   ]
 }
