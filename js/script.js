@@ -1,10 +1,12 @@
 // Caminhos dos arquivos de dados (relativos, funcionam no GitHub Pages)
 const DATA_URL = 'data/materias.json';
 const NOTAS_URL = 'data/notas.json';
+const EMENTAS_URL = 'data/ementas.json';
 
 // Índices por id de matéria, montados no init() e usados pelo modal
 let materiasIndex = {};
 let notasIndex = {};
+let ementasIndex = {};
 
 // Estado do "calcular automaticamente" dentro do modal aberto no momento.
 // Formato por variável: { ativo, qtd, pesos, valores: [], pesosValores: [] }
@@ -29,16 +31,19 @@ const ICONE_CALC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 
 async function init() {
   try {
-    const [respMaterias, respNotas] = await Promise.all([
+    const [respMaterias, respNotas, respEmentas] = await Promise.all([
       fetch(DATA_URL, { cache: 'no-store' }),
       fetch(NOTAS_URL, { cache: 'no-store' }),
+      fetch(EMENTAS_URL, { cache: 'no-store' }),
     ]);
     const dados = await respMaterias.json();
     const dadosNotas = respNotas.ok ? await respNotas.json() : { notas: [] };
+    const dadosEmentas = respEmentas.ok ? await respEmentas.json() : { ementas: [] };
 
     const materias = dados.materias.map(prepararMateria);
     materias.forEach(m => { materiasIndex[m.id] = m; });
     dadosNotas.notas.forEach(n => { notasIndex[n.id] = n; });
+    dadosEmentas.ementas.forEach(e => { ementasIndex[e.id] = e; });
 
     renderSemana(materias);
     renderMaterias(materias);
@@ -173,11 +178,11 @@ function materiaParaHtml(m) {
       <div class="materia-card__body">
         ${m.avaliacoes.map(avaliacaoParaHtml).join('')}
         <div class="materia-card__acoes">
-          <button type="button" class="link-ementa">
+          <button type="button" class="link-ementa" data-materia-id="${m.id}">
             <span>Abrir Ementa</span>
             ${ICONE_SETA}
           </button>
-          <button type="button" class="btn-simular" data-materia-id="${m.id}">Simular notas</button>
+          <button type="button" class="btn-simular" data-materia-id="${m.id}">Simular Média</button>
         </div>
       </div>
     </article>
@@ -200,15 +205,26 @@ function escapeHtml(texto) {
   return div.innerHTML;
 }
 
-// ---------- Modal "Simular notas" ----------
+// Abre em nova aba o link de ementa cadastrado pra essa matéria no
+// ementas.json. Se o campo ainda não foi preenchido, não faz nada.
+function abrirEmenta(materiaId) {
+  const link = ementasIndex[materiaId]?.link;
+  if (!link) return;
+  window.open(link, '_blank', 'noopener');
+}
+
+// ---------- Modal "Simular média" ----------
 function configurarModal() {
   const overlay = document.getElementById('modal-overlay');
 
   // Delegação: um único listener cuida de todos os botões "Simular notas",
   // mesmo que a grade seja re-renderizada depois
   document.getElementById('materias-grid').addEventListener('click', (evento) => {
-    const botao = evento.target.closest('.btn-simular');
-    if (botao) abrirModal(botao.dataset.materiaId);
+    const botaoSimular = evento.target.closest('.btn-simular');
+    if (botaoSimular) abrirModal(botaoSimular.dataset.materiaId);
+
+    const botaoEmenta = evento.target.closest('.link-ementa');
+    if (botaoEmenta) abrirEmenta(botaoEmenta.dataset.materiaId);
   });
 
   document.getElementById('modal-fechar').addEventListener('click', fecharModal);

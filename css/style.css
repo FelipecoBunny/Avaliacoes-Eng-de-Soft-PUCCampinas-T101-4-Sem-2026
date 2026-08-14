@@ -242,7 +242,11 @@ main {
   border-bottom: 1px solid var(--linha);
 }
 
-.avaliacao-row:last-child {
+/* A atividade seguida das ações do card é a "última" de verdade,
+   mesmo que .materia-card__acoes também seja o último filho do body
+   (por isso :last-child nunca pegava essa linha certa). Sem a borda
+   dela aqui, sobra só a divisória de cima dos botões. */
+.avaliacao-row:has(+ .materia-card__acoes) {
   border-bottom: none;
 }
 

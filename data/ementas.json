@@ -1,0 +1,44 @@
+{
+  "ementas": [
+    {
+      "id": "bd2",
+      "nome": "Estudos de Banco de Dados II",
+      "link": "https://drive.google.com/file/d/1vjDRlRZasEfyCP9cIDflzR9K8aVtGgF4/view?usp=share_link"
+    },
+    {
+      "id": "poo",
+      "nome": "Paradigma Programação Orientada à Objetos",
+      "link": "https://drive.google.com/file/d/1wZglnvee1SJ50nX2Ybxz46sGOuXbLv2n/view?usp=share_link"
+    },
+    {
+      "id": "calc",
+      "nome": "Noções de Calculo Diferencial e Integral",
+      "link": "https://drive.google.com/file/d/1MH-yicjBLWrQ_nUNjahR1lr9ccU8BR84/view?usp=share_link"
+    },
+    {
+      "id": "vvs",
+      "nome": "Verificação e Validação de Software",
+      "link": "https://drive.google.com/file/d/1i-RWDEfDNmdayTfDNzy6yfaLZ3yLMWbl/view?usp=share_link"
+    },
+    {
+      "id": "fis",
+      "nome": "Filosofia, Informação e Sociedade",
+      "link": "https://drive.google.com/file/d/1rztymkeh-1joWwfRy4HkeJLLzANYXL_o/view?usp=share_link"
+    },
+    {
+      "id": "idvl",
+      "nome": "Ideação e Validação de Produtos de Software (PI IV)",
+      "link": "https://drive.google.com/file/d/1rztymkeh-1joWwfRy4HkeJLLzANYXL_o/view?usp=share_link"
+    },
+    {
+      "id": "fso",
+      "nome": "Fundamentos de Sistemas Operacionais",
+      "link": "https://drive.google.com/file/d/1QCCDVgIzhHf4MXSiPhLYRvu_jz9eCgM2/view?usp=share_link"
+    },
+    {
+      "id": "anls2",
+      "nome": "Análise e Projeto de Sistemas II",
+      "link": "https://drive.google.com/file/d/1QCCDVgIzhHf4MXSiPhLYRvu_jz9eCgM2/view?usp=share_link"
+    }
+  ]
+}

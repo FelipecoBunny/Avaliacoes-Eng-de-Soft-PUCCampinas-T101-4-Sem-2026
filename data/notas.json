@@ -4,8 +4,8 @@
       "id": "bd2",
       "variaveis": [
         {
-          "variavel": "P1",
-          "nomeExibicao": "Prova 1"
+          "variavel": "P",
+          "nomeExibicao": "Prova Individual"
         },
         {
           "variavel": "PR",
@@ -28,8 +28,8 @@
           "nomeExibicao": "Exercício 4"
         }
       ],
-      "formula": "((EX1 + EX2 + EX3 + EX4) / 4) * 0.5 + (P1 * 0.3) + (PR * 0.2)",
-      "formulaLatex": "NF = \\dfrac{EX_1+EX_2+EX_3+EX_4}{4}\\cdot 0.5 + P_1\\cdot 0.3 + PR\\cdot 0.2"
+      "formula": "((EX1 + EX2 + EX3 + EX4) / 4) * 0.5 + (P1 * 0.3) + (P * 0.2)",
+      "formulaLatex": "MF = \\dfrac{EX_1+EX_2+EX_3+EX_4}{4}\\cdot 0.5 + P\\cdot 0.3 + PR\\cdot 0.2"
     },
     {
       "id": "poo",
@@ -69,7 +69,7 @@
         },
         {
           "variavel": "AT",
-          "nomeExibicao": "Atividades Teóricas (média)",
+          "nomeExibicao": "Atividades Teóricas (Média)",
           "expansivel": true
         }
       ],
@@ -81,12 +81,12 @@
       "variaveis": [
         {
           "variavel": "MPA",
-          "nomeExibicao": "Atividades Somativas (média)",
+          "nomeExibicao": "Atividades Somativas (Média)",
           "expansivel": true
         },
         {
           "variavel": "PC",
-          "nomeExibicao": "Provas/Testes (média)",
+          "nomeExibicao": "Provas/Testes (Média)",
           "expansivel": true
         },
         {
@@ -102,12 +102,12 @@
       "variaveis": [
         {
           "variavel": "AG",
-          "nomeExibicao": "Atividades em Grupo",
+          "nomeExibicao": "Atividades em Grupo (Nota Máxima 7)",
           "notaMaxima": 7
         },
         {
           "variavel": "AI",
-          "nomeExibicao": "Avaliação Individual",
+          "nomeExibicao": "Avaliação Individual (Nota Máxima 3)",
           "notaMaxima": 3
         }
       ],
@@ -119,7 +119,7 @@
       "variaveis": [
         {
           "variavel": "NA",
-          "nomeExibicao": "Atividades de Sala (média)",
+          "nomeExibicao": "Atividades de Sala (Média)",
           "expansivel": true
         },
         {
@@ -147,7 +147,7 @@
         },
         {
           "variavel": "T",
-          "nomeExibicao": "Trabalho Final"
+          "nomeExibicao": "Trabalho Final (Seminário)"
         }
       ],
       "formula": "(P1*0.4)+(P2*0.4)+(T*0.2)",

@@ -10,7 +10,7 @@
       "avaliacoes": [
         {
           "id": "P1",
-          "nome": "Prova 1",
+          "nome": "Prova Individual",
           "tipo": "prova",
           "data": ""
         },
@@ -19,30 +19,6 @@
           "nome": "Projeto Prático",
           "tipo": "projeto",
           "data": ""
-        },
-        {
-          "id": "EX1",
-          "nome": "Exercício 1",
-          "tipo": "exercicio",
-          "data": 0
-        },
-        {
-          "id": "EX2",
-          "nome": "Exercício 2",
-          "tipo": "exercicio",
-          "data": 0
-        },
-        {
-          "id": "EX3",
-          "nome": "Exercício 3",
-          "tipo": "exercicio",
-          "data": 0
-        },
-        {
-          "id": "EX4",
-          "nome": "Exercício 4",
-          "tipo": "exercicio",
-          "data": 0
         }
       ]
     },
@@ -65,18 +41,6 @@
           "nome": "Prova 2",
           "tipo": "prova",
           "data": ""
-        },
-        {
-          "id": "MTb",
-          "nome": "Média dos Trabalhos",
-          "tipo": "trabalho",
-          "data": 0
-        },
-        {
-          "id": "MA",
-          "nome": "Média das Atividades",
-          "tipo": "atividade",
-          "data": 0
         }
       ]
     },
@@ -92,19 +56,13 @@
           "id": "P1",
           "nome": "Prova 1",
           "tipo": "prova",
-          "data": ""
+          "data": "2026-09-29"
         },
         {
           "id": "P2",
           "nome": "Prova 2",
           "tipo": "prova",
-          "data": ""
-        },
-        {
-          "id": "AT",
-          "nome": "Atividades Teóricas (média)",
-          "tipo": "atividade",
-          "data": 0
+          "data": "2026-11-24"
         }
       ]
     },
@@ -115,30 +73,11 @@
         "nome": "Ivan Granja",
         "foto": "assets/professores/ivan.jpg"
       },
-      "avaliacoes": [
-        {
-          "id": "MPA",
-          "nome": "Atividades Somativas (média)",
-          "tipo": "atividade",
-          "data": 0
-        },
-        {
-          "id": "PC",
-          "nome": "Provas/Testes (média)",
-          "tipo": "prova",
-          "data": 0
-        },
-        {
-          "id": "PI",
-          "nome": "Projeto Integrador",
-          "tipo": "projeto",
-          "data": ""
-        }
-      ]
+      "avaliacoes": []
     },
     {
       "id": "fis",
-      "nome": "Filosofia, Informatica e Sociedade",
+      "nome": "Filosofia, Informação e Sociedade",
       "professor": {
         "nome": "Marco Antônio Chabbouh Júnior",
         "foto": "assets/professores/chabbouh.jpeg"
@@ -148,7 +87,7 @@
           "id": "AG",
           "nome": "Atividades em Grupo",
           "tipo": "atividade",
-          "data": 0
+          "data": ""
         },
         {
           "id": "AI",
@@ -160,18 +99,12 @@
     },
     {
       "id": "idvl",
-      "nome": "Ideação e Validação de Produtos de Software",
+      "nome": "Ideação e Validação de Produtos de Software (PI IV)",
       "professor": {
         "nome": "Renata Antônia Tadeu Arantes",
         "foto": "assets/professores/renata.jpeg"
       },
       "avaliacoes": [
-        {
-          "id": "NA",
-          "nome": "Atividades de Sala (média)",
-          "tipo": "atividade",
-          "data": 0
-        },
         {
           "id": "IPI",
           "nome": "Ideação do Projeto Integrador",
@@ -198,17 +131,17 @@
           "id": "P1",
           "nome": "Prova 1",
           "tipo": "prova",
-          "data": ""
+          "data": "2026-09-18"
         },
         {
           "id": "P2",
           "nome": "Prova 2",
           "tipo": "prova",
-          "data": ""
+          "data": "2026-11-13"
         },
         {
           "id": "T",
-          "nome": "Trabalho Final",
+          "nome": "Trabalho Final (Seminário)",
           "tipo": "trabalho",
           "data": ""
         }
@@ -221,14 +154,7 @@
         "nome": "Fernando Ernesto Kintschner",
         "foto": "assets/professores/fernando.jpeg"
       },
-      "avaliacoes": [
-        {
-          "id": "EX",
-          "nome": "Média dos Exercícios",
-          "tipo": "exercicio",
-          "data": 0
-        }
-      ]
+      "avaliacoes": []
     }
   ]
 }
