@@ -231,6 +231,8 @@ main {
 .materia-card__body {
   padding: 0.3rem 1.1rem 0.9rem;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .avaliacao-row {
@@ -295,13 +297,32 @@ main {
   color: var(--accent);
 }
 
+.avaliacoes-vazio {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+  padding: 0.5rem 0;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.materia-card__acoes--vazio {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
 /* ---------- Ações do card (ementa + simular notas) ---------- */
 .materia-card__acoes {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  margin-top: 0.7rem;
+  margin-top: 0.3rem;
   padding-top: 0.85rem;
   border-top: 1px solid var(--linha);
 }
@@ -688,6 +709,23 @@ main {
   font-size: 1.4rem;
   font-weight: 800;
   color: var(--accent);
+}
+
+.modal-nota-maxima {
+  margin: 0.3rem 0 0;
+  text-align: right;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  transition: color 150ms ease;
+}
+
+.modal-nota-maxima--erro {
+  color: #C1443C;
+}
+
+.modal-media-valor--erro {
+  color: #C1443C;
 }
 
 .modal-formula {

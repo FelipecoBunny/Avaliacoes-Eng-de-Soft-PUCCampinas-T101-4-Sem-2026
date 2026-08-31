@@ -4,32 +4,23 @@
       "id": "bd2",
       "variaveis": [
         {
-          "variavel": "P",
-          "nomeExibicao": "Prova Individual"
+          "variavel": "P1",
+          "nomeExibicao": "Prova 1",
+          "notaMaxima": 5
         },
         {
-          "variavel": "PR",
-          "nomeExibicao": "Projeto Prático"
+          "variavel": "P2",
+          "nomeExibicao": "Prova 2",
+          "notaMaxima": 5
         },
         {
-          "variavel": "EX1",
-          "nomeExibicao": "Exercício 1"
-        },
-        {
-          "variavel": "EX2",
-          "nomeExibicao": "Exercício 2"
-        },
-        {
-          "variavel": "EX3",
-          "nomeExibicao": "Exercício 3"
-        },
-        {
-          "variavel": "EX4",
-          "nomeExibicao": "Exercício 4"
+          "variavel": "DE",
+          "nomeExibicao": "Desconto de Exercícios",
+          "necessary": false
         }
       ],
-      "formula": "((EX1 + EX2 + EX3 + EX4) / 4) * 0.5 + (P1 * 0.3) + (P * 0.2)",
-      "formulaLatex": "MF = \\dfrac{EX_1+EX_2+EX_3+EX_4}{4}\\cdot 0.5 + P\\cdot 0.3 + PR\\cdot 0.2"
+      "formula": "P1 + P2 - DE",
+      "formulaLatex": "MF = P1 + P2 - Desconto\\space Exercicios"
     },
     {
       "id": "poo",

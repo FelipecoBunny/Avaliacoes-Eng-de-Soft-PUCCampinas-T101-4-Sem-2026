@@ -10,21 +10,27 @@
       "avaliacoes": [
         {
           "id": "P1",
-          "nome": "Prova Individual",
+          "nome": "Prova 1",
           "tipo": "prova",
-          "data": ""
+          "data": "2026-09-14"
         },
         {
-          "id": "PR",
-          "nome": "Projeto Prático",
-          "tipo": "projeto",
-          "data": ""
+          "id": "P2",
+          "nome": "Prova 2",
+          "tipo": "prova",
+          "data": "2026-10-26"
+        },
+        {
+          "id": "PSub",
+          "nome": "Prova Substitutiva",
+          "tipo": "prova",
+          "data": "2026-11-23"
         }
       ]
     },
     {
       "id": "poo",
-      "nome": "Paradigma e Programação Orientada à Objetos",
+      "nome": "Paradigma Programação Orientada à Objetos",
       "professor": {
         "nome": "André L. R. G. de Carvalho \"Malígno\"",
         "foto": "assets/professores/maligno.jpg"
@@ -34,7 +40,7 @@
           "id": "Pv1",
           "nome": "Prova 1",
           "tipo": "prova",
-          "data": ""
+          "data": "2026-09-16"
         },
         {
           "id": "Pv2",
@@ -46,10 +52,10 @@
     },
     {
       "id": "calc",
-      "nome": "Noções de Cálculo Diferencial e Integral",
+      "nome": "Noções de Calculo Diferencial e Integral",
       "professor": {
         "nome": "Maria Margarida M. de Almeida",
-        "foto": "assets/professores/maria-margarida.jpg"
+        "foto": "assets/professores/margarida.png"
       },
       "avaliacoes": [
         {
@@ -82,42 +88,16 @@
         "nome": "Marco Antônio Chabbouh Júnior",
         "foto": "assets/professores/chabbouh.jpeg"
       },
-      "avaliacoes": [
-        {
-          "id": "AG",
-          "nome": "Atividades em Grupo",
-          "tipo": "atividade",
-          "data": ""
-        },
-        {
-          "id": "AI",
-          "nome": "Avaliação Individual",
-          "tipo": "prova",
-          "data": ""
-        }
-      ]
+      "avaliacoes": []
     },
     {
       "id": "idvl",
-      "nome": "Ideação e Validação de Produtos de Software (PI IV)",
+      "nome": "Ideação e Validação de Produtos de Software",
       "professor": {
         "nome": "Renata Antônia Tadeu Arantes",
         "foto": "assets/professores/renata.jpeg"
       },
-      "avaliacoes": [
-        {
-          "id": "IPI",
-          "nome": "Ideação do Projeto Integrador",
-          "tipo": "projeto",
-          "data": "2026-09-10"
-        },
-        {
-          "id": "PI",
-          "nome": "Pitch do Projeto Integrador",
-          "tipo": "apresentacao",
-          "data": "2026-09-10"
-        }
-      ]
+      "avaliacoes": []
     },
     {
       "id": "fso",

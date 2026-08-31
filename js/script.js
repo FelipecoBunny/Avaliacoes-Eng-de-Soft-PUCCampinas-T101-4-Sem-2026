@@ -114,6 +114,10 @@ function formatarData(dataObj) {
   return dataObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
 }
 
+function formatarNumero(n) {
+  return n.toFixed(2).replace('.', ',');
+}
+
 // Texto de data pra exibir: usa o texto especial (Não definido / Sem data)
 // quando não há uma data válida, senão formata normalmente.
 function textoData(a) {
@@ -164,6 +168,15 @@ function renderMaterias(materias) {
 }
 
 function materiaParaHtml(m) {
+  const semAvaliacoes = m.avaliacoes.length === 0;
+  const corpoAvaliacoes = semAvaliacoes
+    ? '<p class="avaliacoes-vazio">Nenhuma avaliação encontrada</p>'
+    : m.avaliacoes.map(avaliacaoParaHtml).join('');
+
+  const ementa = ementasIndex[m.id];
+  const textoEmenta = ementa?.ementaAntiga ? 'Abrir Ementa (Desatualizada)' : 'Abrir Ementa';
+  const textoSimular = ementa?.ementaAntiga ? 'Simular Média (Desatualizado)' : 'Simular Média';
+
   return `
     <article class="materia-card">
       <header class="materia-card__header">
@@ -176,13 +189,13 @@ function materiaParaHtml(m) {
         </div>
       </header>
       <div class="materia-card__body">
-        ${m.avaliacoes.map(avaliacaoParaHtml).join('')}
-        <div class="materia-card__acoes">
+        ${corpoAvaliacoes}
+        <div class="materia-card__acoes${semAvaliacoes ? ' materia-card__acoes--vazio' : ''}">
           <button type="button" class="link-ementa" data-materia-id="${m.id}">
-            <span>Abrir Ementa</span>
+            <span>${textoEmenta}</span>
             ${ICONE_SETA}
           </button>
-          <button type="button" class="btn-simular" data-materia-id="${m.id}">Simular Média</button>
+          <button type="button" class="btn-simular" data-materia-id="${m.id}">${textoSimular}</button>
         </div>
       </div>
     </article>
@@ -254,8 +267,11 @@ function abrirModal(materiaId) {
     <div class="modal-campo">
       <div class="modal-linha">
         <span class="modal-linha__nome">${escapeHtml(v.nomeExibicao)} <span class="modal-linha__sigla">(${escapeHtml(v.variavel)})</span></span>
-        <input type="text" inputmode="decimal" class="modal-input" data-variavel="${v.variavel}" placeholder="0,0" autocomplete="off">
+        <input type="text" inputmode="decimal" class="modal-input" data-variavel="${v.variavel}" placeholder="${v.necessary === false ? 'Opc.' : '0,0'}" autocomplete="off">
       </div>
+      ${v.notaMaxima !== undefined ? `
+      <p class="modal-nota-maxima" id="nota-maxima-${v.variavel}">Nota Máxima: ${formatarNumero(v.notaMaxima)}</p>
+      ` : ''}
       ${v.expansivel ? `
       <div class="modal-calc-linha">
         <button type="button" class="modal-calc-toggle" data-variavel="${v.variavel}" aria-expanded="false" aria-controls="expand-${v.variavel}" title="Calcular automaticamente">${ICONE_CALC}<span>Calcular Média</span></button>
@@ -286,6 +302,11 @@ function abrirModal(materiaId) {
     alvoFormula.textContent = notas.formula;
   }
 
+  const tituloFormula = document.getElementById('modal-formula-titulo');
+  tituloFormula.textContent = ementasIndex[materiaId]?.ementaAntiga
+    ? 'Fórmula (Ementa Desatualizada)'
+    : 'Fórmula';
+
   const overlay = document.getElementById('modal-overlay');
   overlay.hidden = false;
   document.body.style.overflow = 'hidden';
@@ -303,17 +324,41 @@ function calcularMediaModal(notas) {
   const inputs = document.querySelectorAll('#modal-campos .modal-input[data-variavel]');
   const valores = {};
   let completo = true;
+  let acimaDoMaximo = false;
 
   inputs.forEach(input => {
+    const variavel = input.dataset.variavel;
+    const infoVariavel = notas.variaveis.find(v => v.variavel === variavel);
     const bruto = input.value.trim().replace(',', '.');
-    if (bruto === '' || isNaN(parseFloat(bruto))) {
+    const numero = parseFloat(bruto);
+    const valido = bruto !== '' && !isNaN(numero);
+    const opcional = infoVariavel?.necessary === false;
+
+    if (valido) {
+      valores[variavel] = numero;
+    } else if (opcional) {
+      valores[variavel] = 0; // campo opcional vazio não trava o cálculo
+    } else {
       completo = false;
-      return;
     }
-    valores[input.dataset.variavel] = parseFloat(bruto);
+
+    if (infoVariavel?.notaMaxima !== undefined) {
+      const excedeu = valido && numero > infoVariavel.notaMaxima;
+      if (excedeu) acimaDoMaximo = true;
+      document.getElementById(`nota-maxima-${variavel}`)
+        ?.classList.toggle('modal-nota-maxima--erro', excedeu);
+    }
   });
 
   const saida = document.getElementById('modal-media-valor');
+  saida.classList.remove('modal-media-valor--erro');
+
+  if (acimaDoMaximo) {
+    saida.textContent = 'Valor acima do permitido';
+    saida.classList.add('modal-media-valor--erro');
+    return;
+  }
+
   if (!completo) {
     saida.textContent = '—';
     return;
@@ -326,6 +371,7 @@ function calcularMediaModal(notas) {
     saida.textContent = resultado.toFixed(2).replace('.', ',');
   } catch (erro) {
     saida.textContent = 'erro na fórmula';
+    saida.classList.add('modal-media-valor--erro');
     console.error(`Erro ao calcular a média de "${notas.id}":`, erro);
   }
 }
