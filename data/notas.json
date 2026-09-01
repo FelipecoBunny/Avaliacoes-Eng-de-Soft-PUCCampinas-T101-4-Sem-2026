@@ -52,15 +52,18 @@
       "variaveis": [
         {
           "variavel": "P1",
-          "nomeExibicao": "Prova 1"
+          "nomeExibicao": "Prova 1",
+          "notaMaxima": 10
         },
         {
           "variavel": "P2",
-          "nomeExibicao": "Prova 2"
+          "nomeExibicao": "Prova 2",
+          "notaMaxima": 10
         },
         {
           "variavel": "AT",
-          "nomeExibicao": "Atividades Teóricas (Média)",
+          "nomeExibicao": "Média das Atividades Teóricas",
+          "notaMaxima": 10,
           "expansivel": true
         }
       ],
@@ -71,13 +74,13 @@
       "id": "vvs",
       "variaveis": [
         {
-          "variavel": "MPA",
-          "nomeExibicao": "Atividades Somativas (Média)",
+          "variavel": "MA",
+          "nomeExibicao": "Média Ponderada das Atividades",
           "expansivel": true
         },
         {
           "variavel": "PC",
-          "nomeExibicao": "Provas/Testes (Média)",
+          "nomeExibicao": "Média das Provas e Testes",
           "expansivel": true
         },
         {
@@ -85,20 +88,20 @@
           "nomeExibicao": "Projeto Integrador"
         }
       ],
-      "formula": "(MPA * 0.4) + (PC * 0.5) + (PI * 0.1)",
-      "formulaLatex": "MF = 0.4\\,MPA + 0.5\\,PC + 0.1\\,PI"
+      "formula": "(MA * 0.2) + (PC * 0.7) + (PI * 0.1)",
+      "formulaLatex": "MF = 0.2\\,MA + 0.7\\,PC + 0.1\\,PI"
     },
     {
       "id": "fis",
       "variaveis": [
         {
           "variavel": "AG",
-          "nomeExibicao": "Atividades em Grupo (Nota Máxima 7)",
+          "nomeExibicao": "Atividades em Grupo",
           "notaMaxima": 7
         },
         {
           "variavel": "AI",
-          "nomeExibicao": "Avaliação Individual (Nota Máxima 3)",
+          "nomeExibicao": "Avaliação Individual",
           "notaMaxima": 3
         }
       ],
@@ -110,7 +113,7 @@
       "variaveis": [
         {
           "variavel": "NA",
-          "nomeExibicao": "Atividades de Sala (Média)",
+          "nomeExibicao": "Média das Atividades em Sala",
           "expansivel": true
         },
         {
@@ -138,11 +141,12 @@
         },
         {
           "variavel": "T",
-          "nomeExibicao": "Trabalho Final (Seminário)"
+          "nomeExibicao": "Trabalho Final (Seminário)",
+          "necessary": false
         }
       ],
-      "formula": "(P1*0.4)+(P2*0.4)+(T*0.2)",
-      "formulaLatex": "MF = 0.4\\,P_1 + 0.4\\,P_2 + 0.2\\,T"
+      "formula": "(P1*0.425)+(P2*0.425)+(T*0.15)",
+      "formulaLatex": "MF = 0.425\\,P_1 + 0.425\\,P_2 + 0.15\\,T"
     },
     {
       "id": "anls2",
@@ -155,6 +159,14 @@
       ],
       "formula": "EX",
       "formulaLatex": "MF = EX"
+    },
+    {
+      "id": "piiv",
+      "variaveis": [
+        {}
+      ],
+      "formula": "",
+      "formulaLatex": "SEM\\space FÓRMULA"
     }
   ]
 }

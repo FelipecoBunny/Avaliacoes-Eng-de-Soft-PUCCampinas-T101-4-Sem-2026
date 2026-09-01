@@ -68,7 +68,19 @@
           "id": "P2",
           "nome": "Prova 2",
           "tipo": "prova",
-          "data": "2026-11-24"
+          "data": "2026-11-17"
+        },
+        {
+          "id": "T1",
+          "nome": "Teste Assíncrono 1",
+          "tipo": "teste",
+          "data": "2026-09-15"
+        },
+        {
+          "id": "P3Rec",
+          "nome": "Prova 3 (Recuperação)",
+          "tipo": "prova",
+          "data": "2026-12-01"
         }
       ]
     },
@@ -97,7 +109,26 @@
         "nome": "Renata Antônia Tadeu Arantes",
         "foto": "assets/professores/renata.jpeg"
       },
-      "avaliacoes": []
+      "avaliacoes": [
+        {
+          "id": "ideas",
+          "nome": "Levantamento de Ideias",
+          "tipo": "atividade",
+          "data": "2026-08-27"
+        },
+        {
+          "id": "mmbmcemp",
+          "nome": "Mapa Mental, BMC e Mapa de Empatia",
+          "tipo": "atividade",
+          "data": "2026-08-31"
+        },
+        {
+          "id": "pitchdoc",
+          "nome": "Documento de Ideadeção e do Pitch",
+          "tipo": "entrega",
+          "data": "2026-09-10"
+        }
+      ]
     },
     {
       "id": "fso",
@@ -133,6 +164,15 @@
       "professor": {
         "nome": "Fernando Ernesto Kintschner",
         "foto": "assets/professores/fernando.jpeg"
+      },
+      "avaliacoes": []
+    },
+    {
+      "id": "piiv",
+      "nome": "Projeto Integrador IV",
+      "professor": {
+        "nome": "Renata Antônia Tadeu Arantes",
+        "foto": "assets/professores/renata.jpeg"
       },
       "avaliacoes": []
     }
