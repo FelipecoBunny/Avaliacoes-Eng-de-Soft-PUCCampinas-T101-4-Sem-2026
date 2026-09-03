@@ -127,6 +127,12 @@
           "nome": "Documento de Ideadeção e do Pitch",
           "tipo": "entrega",
           "data": "2026-09-10"
+        },
+        {
+          "id": "swot",
+          "nome": "Matriz Swot e matriz Swot Cruzada",
+          "tipo": "atividade",
+          "data": "2026-09-04"
         }
       ]
     },
