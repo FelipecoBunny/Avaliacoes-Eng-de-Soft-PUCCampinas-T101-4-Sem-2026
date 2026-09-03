@@ -100,7 +100,14 @@
         "nome": "Marco Antônio Chabbouh Júnior",
         "foto": "assets/professores/chabbouh.jpeg"
       },
-      "avaliacoes": []
+      "avaliacoes": [
+        {
+          "id": "p1",
+          "nome": "Prova 1",
+          "tipo": "prova",
+          "data": "2026-10-01"
+        }
+      ]
     },
     {
       "id": "idvl",
