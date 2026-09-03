@@ -91,7 +91,14 @@
         "nome": "Ivan Granja",
         "foto": "assets/professores/ivan.jpg"
       },
-      "avaliacoes": []
+      "avaliacoes": [
+        {
+          "id": "p1",
+          "nome": "Prova 1",
+          "tipo": "prova",
+          "data": "2026-10-06"
+        }
+      ]
     },
     {
       "id": "fis",
@@ -100,14 +107,7 @@
         "nome": "Marco Antônio Chabbouh Júnior",
         "foto": "assets/professores/chabbouh.jpeg"
       },
-      "avaliacoes": [
-        {
-          "id": "p1",
-          "nome": "Prova 1",
-          "tipo": "prova",
-          "data": "2026-10-01"
-        }
-      ]
+      "avaliacoes": []
     },
     {
       "id": "idvl",
