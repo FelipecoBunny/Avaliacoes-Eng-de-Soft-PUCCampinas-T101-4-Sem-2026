@@ -20,9 +20,14 @@ const ICONES = {
   futura: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><line x1="3.5" y1="10" x2="20.5" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg>',
 };
 
-function iconePorStatus(status) {
+// Tipos de avaliação que merecem destaque vermelho (maior urgência)
+// quando caem dentro dos próximos 7 dias
+const TIPOS_URGENTES = ['prova', 'teste', 'importante'];
+
+function iconePorStatus(status, urgente = false) {
   const svg = ICONES[status] || ICONES.futura;
-  return `<span class="icone icone--${status}">${svg}</span>`;
+  const classeUrgente = urgente ? ' icone--urgente' : '';
+  return `<span class="icone icone--${status}${classeUrgente}">${svg}</span>`;
 }
 
 const ICONE_SETA = '<span class="icone icone--seta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></span>';
@@ -96,6 +101,8 @@ function prepararMateria(materia) {
     });
 
   avaliacoes.forEach(a => {
+    a.urgente = TIPOS_URGENTES.includes((a.tipo || '').toLowerCase());
+
     if (!a.dataObj) {
       a.status = 'futura'; // sem data conhecida -> tratada como card normal
     } else if (a.dataObj < hoje) {
@@ -150,9 +157,9 @@ function renderSemana(materias) {
   }
 
   container.innerHTML = daSemana.map(a => `
-    <article class="semana-card">
+    <article class="semana-card${a.urgente ? ' semana-card--urgente' : ''}">
       <div class="semana-card__topo">
-        <span class="semana-card__avaliacao">${iconePorStatus('proxima')}<span>${escapeHtml(a.nome)}</span></span>
+        <span class="semana-card__avaliacao">${iconePorStatus('proxima', a.urgente)}<span>${escapeHtml(a.nome)}</span></span>
         <span class="semana-card__data">${formatarData(a.dataObj)}</span>
       </div>
       <p class="semana-card__materia">${escapeHtml(a.materiaNome)}</p>
@@ -203,9 +210,10 @@ function materiaParaHtml(m) {
 }
 
 function avaliacaoParaHtml(a) {
+  const destaque = a.status === 'proxima' && a.urgente;
   return `
-    <div class="avaliacao-row avaliacao-row--${a.status}">
-      <span class="avaliacao-label">${iconePorStatus(a.status)}<span class="avaliacao-nome">${escapeHtml(a.nome)}</span></span>
+    <div class="avaliacao-row avaliacao-row--${a.status}${destaque ? ' avaliacao-row--urgente' : ''}">
+      <span class="avaliacao-label">${iconePorStatus(a.status, destaque)}<span class="avaliacao-nome">${escapeHtml(a.nome)}</span></span>
       <span class="avaliacao-data">${textoData(a)}</span>
     </div>
   `;
@@ -263,7 +271,26 @@ function abrirModal(materiaId) {
   document.getElementById('modal-professor').textContent = materia.professor.nome;
 
   const camposEl = document.getElementById('modal-campos');
-  camposEl.innerHTML = notas.variaveis.map(v => `
+  camposEl.innerHTML = notas.variaveis.map(v => {
+    if (v.switch !== undefined) {
+      const ligado = !!v.switch;
+      return `
+        <div class="modal-campo">
+          <div class="modal-linha">
+            <span class="modal-linha__nome">${escapeHtml(v.nomeExibicao)} <span class="modal-linha__sigla">(${escapeHtml(v.variavel)})</span></span>
+            <div class="modal-switch" data-variavel="${v.variavel}">
+              <span class="modal-switch__label modal-switch__label--nao${ligado ? '' : ' modal-switch__label--ativo'}">Não</span>
+              <button type="button" class="modal-switch__track" role="switch" aria-checked="${ligado}" data-variavel="${v.variavel}">
+                <span class="modal-switch__thumb"></span>
+              </button>
+              <span class="modal-switch__label modal-switch__label--sim${ligado ? ' modal-switch__label--ativo' : ''}">Sim</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    return `
     <div class="modal-campo">
       <div class="modal-linha">
         <span class="modal-linha__nome">${escapeHtml(v.nomeExibicao)} <span class="modal-linha__sigla">(${escapeHtml(v.variavel)})</span></span>
@@ -279,7 +306,21 @@ function abrirModal(materiaId) {
       <div id="expand-${v.variavel}" class="modal-expand" hidden></div>
       ` : ''}
     </div>
-  `).join('');
+  `;
+  }).join('');
+
+  camposEl.querySelectorAll('.modal-switch__track').forEach(botao => {
+    botao.addEventListener('click', () => {
+      const novoEstado = botao.getAttribute('aria-checked') !== 'true';
+      botao.setAttribute('aria-checked', String(novoEstado));
+
+      const grupo = botao.closest('.modal-switch');
+      grupo.querySelector('.modal-switch__label--nao').classList.toggle('modal-switch__label--ativo', !novoEstado);
+      grupo.querySelector('.modal-switch__label--sim').classList.toggle('modal-switch__label--ativo', novoEstado);
+
+      calcularMediaModal(notas);
+    });
+  });
 
   camposEl.querySelectorAll('.modal-input').forEach(input => {
     input.addEventListener('input', () => {
@@ -321,18 +362,24 @@ function fecharModal() {
 // Recalcula a média final do modal; só calcula quando todos os campos
 // estiverem preenchidos. O resultado sempre é exibido com vírgula.
 function calcularMediaModal(notas) {
-  const inputs = document.querySelectorAll('#modal-campos .modal-input[data-variavel]');
   const valores = {};
   let completo = true;
   let acimaDoMaximo = false;
 
-  inputs.forEach(input => {
-    const variavel = input.dataset.variavel;
-    const infoVariavel = notas.variaveis.find(v => v.variavel === variavel);
+  notas.variaveis.forEach(infoVariavel => {
+    const variavel = infoVariavel.variavel;
+
+    if (infoVariavel.switch !== undefined) {
+      const track = document.querySelector(`.modal-switch__track[data-variavel="${variavel}"]`);
+      valores[variavel] = track?.getAttribute('aria-checked') === 'true' ? 1 : 0;
+      return;
+    }
+
+    const input = document.querySelector(`.modal-input[data-variavel="${variavel}"]`);
     const bruto = input.value.trim().replace(',', '.');
     const numero = parseFloat(bruto);
     const valido = bruto !== '' && !isNaN(numero);
-    const opcional = infoVariavel?.necessary === false;
+    const opcional = infoVariavel.necessary === false;
 
     if (valido) {
       valores[variavel] = numero;
@@ -342,7 +389,7 @@ function calcularMediaModal(notas) {
       completo = false;
     }
 
-    if (infoVariavel?.notaMaxima !== undefined) {
+    if (infoVariavel.notaMaxima !== undefined) {
       const excedeu = valido && numero > infoVariavel.notaMaxima;
       if (excedeu) acimaDoMaximo = true;
       document.getElementById(`nota-maxima-${variavel}`)

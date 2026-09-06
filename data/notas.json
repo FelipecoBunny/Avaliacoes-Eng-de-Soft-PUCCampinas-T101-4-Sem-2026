@@ -39,13 +39,18 @@
           "expansivel": true
         },
         {
-          "variavel": "MA",
-          "nomeExibicao": "Média das Atividades",
-          "expansivel": true
+          "variavel": "PI",
+          "nomeExibicao": "Média do PI",
+          "necessary": false
+        },
+        {
+          "variavel": "MPI",
+          "nomeExibicao": "Matriculado no Projeto Integrador?",
+          "switch": true
         }
       ],
-      "formula": "((Pv1*1 + Pv2*2) / 3 >= 5 && MTb >= 5 && MA >= 5) ? (0.5*((Pv1*1 + Pv2*2) / 3) + 0.3*MTb + 0.2*MA) : Math.min((Pv1*1 + Pv2*2) / 3, MTb, MA)",
-      "formulaLatex": "MF = \\begin{cases} 0.5\\left(\\dfrac{Pv_1+2Pv_2}{3}\\right) + 0.3\\,MTb + 0.2\\,MA & \\text{se } \\dfrac{Pv_1+2Pv_2}{3},\\ MTb,\\ MA \\ge 5 \\\\[6pt] \\min\\!\\left(\\dfrac{Pv_1+2Pv_2}{3},\\ MTb,\\ MA\\right) & \\text{caso contrário} \\end{cases}"
+      "formula": "((Pv1*1 + Pv2*2) / 3 < 5 || MTb < 5) ? Math.min((Pv1*1 + Pv2*2) / 3, MTb) : (MPI * (0.6*((Pv1*1 + Pv2*2) / 3) + 0.3*MTb + 0.1*PI) + (1 - MPI) * (0.6*((Pv1*1 + Pv2*2) / 3) + 0.4*MTb))",
+      "formulaLatex": "MF = \\begin{cases} \\min(MPv,\\ MTb) & \\text{se } MPv < 5 \\text{ ou } MTb < 5 \\\\[6pt] 0.6\\,MPv + 0.3\\,MTb + 0.1\\,PI & \\text{se } MPv,\\ MTb \\ge 5 \\text{ e matriculado em PI} \\\\[6pt] 0.6\\,MPv + 0.4\\,MTb & \\text{se } MPv,\\ MTb \\ge 5 \\text{ e não matriculado em PI} \\end{cases} \\quad \\text{onde } MPv = \\dfrac{Pv_1+2Pv_2}{3}"
     },
     {
       "id": "calc",
@@ -97,12 +102,12 @@
         {
           "variavel": "AG",
           "nomeExibicao": "Atividades em Grupo",
-          "notaMaxima": 7
+          "notaMaxima": 4
         },
         {
           "variavel": "AI",
           "nomeExibicao": "Avaliação Individual",
-          "notaMaxima": 3
+          "notaMaxima": 4.5
         }
       ],
       "formula": "AG + AI",
@@ -140,13 +145,13 @@
           "nomeExibicao": "Prova 2"
         },
         {
-          "variavel": "T",
+          "variavel": "S",
           "nomeExibicao": "Trabalho Final (Seminário)",
           "necessary": false
         }
       ],
-      "formula": "(P1*0.425)+(P2*0.425)+(T*0.15)",
-      "formulaLatex": "MF = 0.425\\,P_1 + 0.425\\,P_2 + 0.15\\,T"
+      "formula": "(P1*0.425)+(P2*0.425)+(S*0.15)",
+      "formulaLatex": "MF = 0.425\\,P_1 + 0.425\\,P_2 + 0.15\\,S"
     },
     {
       "id": "anls2",
@@ -163,10 +168,29 @@
     {
       "id": "piiv",
       "variaveis": [
-        {}
+        {
+          "variavel": "I",
+          "nomeExibicao": "Ideação"
+        },
+        {
+          "variavel": "T",
+          "nomeExibicao": "Testes automatizados"
+        },
+        {
+          "variavel": "S",
+          "nomeExibicao": "Servidor"
+        },
+        {
+          "variavel": "BD",
+          "nomeExibicao": "Banco de Dados"
+        },
+        {
+          "variavel": "B",
+          "nomeExibicao": "Banca"
+        }
       ],
-      "formula": "",
-      "formulaLatex": "SEM\\space FÓRMULA"
+      "formula": "(I*0.1)+(T*0.1)+(S*0.1)+(BD*0.1)+(B*0.6)",
+      "formulaLatex": "MF = 0.1\\,I + 0.1\\,T + 0.1\\,S + 0.1\\,BD + 0.6\\,B"
     }
   ]
 }

@@ -178,7 +178,14 @@
         "nome": "Fernando Ernesto Kintschner",
         "foto": "assets/professores/fernando.jpeg"
       },
-      "avaliacoes": []
+      "avaliacoes": [
+        {
+          "id": "EX7",
+          "nome": "Exercício 7 - Lista de Exercícios",
+          "tipo": "atividade",
+          "data": "2026-09-11"
+        }
+      ]
     },
     {
       "id": "piiv",
