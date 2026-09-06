@@ -1,7 +1,10 @@
-// Caminhos dos arquivos de dados (relativos, funcionam no GitHub Pages)
-const DATA_URL = 'data/materias.json';
-const NOTAS_URL = 'data/notas.json';
-const EMENTAS_URL = 'data/ementas.json';
+// Endereço do Worker que serve os JSONs e as fotos guardados no bucket
+// R2 (privado) — é o único ponto de contato com os dados de verdade.
+const WORKER_BASE = 'https://provas-turma101-api.felipecoelho-apple.workers.dev';
+
+const DATA_URL = `${WORKER_BASE}/data/materias.json`;
+const NOTAS_URL = `${WORKER_BASE}/data/notas.json`;
+const EMENTAS_URL = `${WORKER_BASE}/data/ementas.json`;
 
 // Índices por id de matéria, montados no init() e usados pelo modal
 let materiasIndex = {};
@@ -37,9 +40,9 @@ const ICONE_CALC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 async function init() {
   try {
     const [respMaterias, respNotas, respEmentas] = await Promise.all([
-      fetch(DATA_URL, { cache: 'no-store' }),
-      fetch(NOTAS_URL, { cache: 'no-store' }),
-      fetch(EMENTAS_URL, { cache: 'no-store' }),
+      fetch(DATA_URL),
+      fetch(NOTAS_URL),
+      fetch(EMENTAS_URL),
     ]);
     const dados = await respMaterias.json();
     const dadosNotas = respNotas.ok ? await respNotas.json() : { notas: [] };
@@ -55,7 +58,7 @@ async function init() {
     configurarModal();
   } catch (erro) {
     document.getElementById('materias-grid').innerHTML =
-      '<p class="erro">Não foi possível carregar os dados. Confira o arquivo data/materias.json.</p>';
+      '<p class="erro">Não foi possível carregar os dados. Confira se o Worker está no ar.</p>';
     console.error(erro);
   }
 }
@@ -187,7 +190,7 @@ function materiaParaHtml(m) {
   return `
     <article class="materia-card">
       <header class="materia-card__header">
-        <img class="materia-card__foto" src="${m.professor.foto}"
+        <img class="materia-card__foto" src="${urlFoto(m.professor.foto)}"
              alt="Foto de ${escapeHtml(m.professor.nome)}"
              onerror="this.style.display='none'">
         <div>
@@ -224,6 +227,12 @@ function escapeHtml(texto) {
   const div = document.createElement('div');
   div.textContent = texto ?? '';
   return div.innerHTML;
+}
+
+// Monta a URL completa de uma foto guardada no bucket R2 (o JSON só
+// guarda o caminho relativo, ex: "fotos/ivan.jpg")
+function urlFoto(caminho) {
+  return `${WORKER_BASE}/${caminho}`;
 }
 
 // Abre em nova aba o link de ementa cadastrado pra essa matéria no
@@ -264,7 +273,7 @@ function abrirModal(materiaId) {
 
   expansaoState = {}; // cada abertura de modal começa com os painéis fechados
 
-  document.getElementById('modal-foto').src = materia.professor.foto;
+  document.getElementById('modal-foto').src = urlFoto(materia.professor.foto);
   document.getElementById('modal-foto').style.display = '';
   document.getElementById('modal-foto').alt = `Foto de ${materia.professor.nome}`;
   document.getElementById('modal-titulo').textContent = materia.nome;
