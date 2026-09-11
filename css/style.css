@@ -62,7 +62,7 @@ main {
   padding: 0 1.5rem 3rem;
 }
 
-/* ---------- Provas da semana ---------- */
+/* ---------- Próximos 7 dias ---------- */
 .semana {
   margin-bottom: 2.5rem;
 }
@@ -72,6 +72,22 @@ main {
   font-weight: 700;
   letter-spacing: -0.01em;
   margin: 0 0 0.75rem;
+}
+
+.semana-grupo {
+  margin-bottom: 1.1rem;
+}
+
+.semana-grupo:last-child {
+  margin-bottom: 0;
+}
+
+.semana-grupo__titulo {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem;
 }
 
 .semana-lista {
@@ -143,6 +159,18 @@ main {
 .semana-card--urgente .semana-card__avaliacao,
 .semana-card--urgente .semana-card__data {
   color: var(--perigo);
+}
+
+.semana-card--compacto {
+  padding: 0.55rem 0.85rem;
+}
+
+.semana-card--compacto .semana-card__topo {
+  margin-bottom: 0.3rem;
+}
+
+.semana-lista--compacta {
+  gap: 0.5rem;
 }
 
 .semana-vazia {

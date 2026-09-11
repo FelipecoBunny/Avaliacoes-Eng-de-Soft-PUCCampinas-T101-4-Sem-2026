@@ -134,7 +134,7 @@ function textoData(a) {
   return a.textoEspecial ?? formatarData(a.dataObj);
 }
 
-// ---------- Seção "Essa semana" ----------
+// ---------- Seção "Próximos 7 dias" ----------
 function renderSemana(materias) {
   const hoje = hojeSemHora();
   const limite = new Date(hoje);
@@ -150,7 +150,7 @@ function renderSemana(materias) {
   });
   daSemana.sort((a, b) => a.dataObj - b.dataObj);
 
-  const container = document.getElementById('semana-lista');
+  const container = document.getElementById('semana-conteudo');
 
   if (daSemana.length === 0) {
     container.innerHTML = `
@@ -159,16 +159,48 @@ function renderSemana(materias) {
     return;
   }
 
-  container.innerHTML = daSemana.map(a => `
-    <article class="semana-card${a.urgente ? ' semana-card--urgente' : ''}">
+  // TIPOS_URGENTES (prova/teste/importante) já é o mesmo critério usado pro
+  // destaque vermelho — então ele também decide quem vai pra cada grupo.
+  // A ordem cronológica dentro de cada grupo já vem do sort acima (filter preserva).
+  const provasTestes = daSemana.filter(a => a.urgente);
+  const demaisAtividades = daSemana.filter(a => !a.urgente);
+
+  let html = '';
+  if (provasTestes.length > 0) {
+    html += semanaGrupoParaHtml('Provas e Testes', provasTestes, false);
+  }
+  if (demaisAtividades.length > 0) {
+    html += semanaGrupoParaHtml('Demais Atividades', demaisAtividades, true);
+  }
+  // Se só um dos dois grupos tem itens, o outro simplesmente não é
+  // adicionado ao HTML — não aparece nem o título, nem uma lista vazia.
+  container.innerHTML = html;
+}
+
+function semanaGrupoParaHtml(titulo, itens, compacto) {
+  const classeLista = compacto ? 'semana-lista semana-lista--compacta' : 'semana-lista';
+  return `
+    <div class="semana-grupo">
+      <h3 class="semana-grupo__titulo">${titulo}</h3>
+      <div class="${classeLista}">
+        ${itens.map(a => semanaCardParaHtml(a, compacto)).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function semanaCardParaHtml(a, compacto) {
+  const classes = `semana-card${a.urgente ? ' semana-card--urgente' : ''}${compacto ? ' semana-card--compacto' : ''}`;
+  return `
+    <article class="${classes}">
       <div class="semana-card__topo">
         <span class="semana-card__avaliacao">${iconePorStatus('proxima', a.urgente)}<span>${escapeHtml(a.nome)}</span></span>
         <span class="semana-card__data">${formatarData(a.dataObj)}</span>
       </div>
       <p class="semana-card__materia">${escapeHtml(a.materiaNome)}</p>
-      <p class="semana-card__professor">${escapeHtml(a.professorNome)}</p>
+      ${compacto ? '' : `<p class="semana-card__professor">${escapeHtml(a.professorNome)}</p>`}
     </article>
-  `).join('');
+  `;
 }
 
 // ---------- Grid de matérias ----------
