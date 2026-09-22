@@ -63,39 +63,69 @@ async function init() {
   }
 }
 
-// Data de hoje, zerando as horas pra comparar só o dia
-function hojeSemHora() {
-  const d = new Date();
-  d.setHours(0, 0, 0, 0);
-  return d;
+// Brasília não tem mais horário de verão desde 2019, então o
+// deslocamento em relação ao UTC é sempre fixo: -3 horas. Isso permite
+// calcular tudo sem depender do fuso configurado no aparelho de quem visita.
+const FUSO_BRASILIA = 'America/Sao_Paulo';
+const OFFSET_BRASILIA_HORAS = 3;
+
+// Constrói o instante exato (absoluto) de uma data/hora interpretadas
+// como horário de Brasília — independe do fuso do dispositivo.
+function instanteBrasilia(ano, mes, dia, hora = 0, minuto = 0) {
+  return new Date(Date.UTC(ano, mes - 1, dia, hora + OFFSET_BRASILIA_HORAS, minuto, 0));
 }
 
-// Recebe o valor bruto de "data" do JSON e devolve ou um objeto Date válido,
-// ou um texto especial pra quando não tem data de verdade.
-function resolverData(bruto) {
-  if (bruto === 0 || bruto === '0') {
-    return { dataObj: null, textoEspecial: 'Sem data' };
+// Meia-noite de "hoje", contando o dia sempre pelo calendário de Brasília
+// (não pelo fuso local do celular de quem está vendo o site).
+function hojeBrasilia() {
+  const agora = new Date();
+  const deslocado = new Date(agora.getTime() - OFFSET_BRASILIA_HORAS * 3600000);
+  return instanteBrasilia(deslocado.getUTCFullYear(), deslocado.getUTCMonth() + 1, deslocado.getUTCDate());
+}
+
+// Recebe a data (e o horário, opcional) brutos do JSON e devolve:
+// - dataObj: meia-noite do próprio dia em Brasília (usado pra exibir e ordenar)
+// - momentoConclusao: o instante exato (Brasília) em que a avaliação vira "concluída"
+// - textoEspecial: mensagem pra quando não há uma data válida
+function resolverData(dataBruta, horarioBruto) {
+  if (dataBruta === 0 || dataBruta === '0') {
+    return { dataObj: null, momentoConclusao: null, textoEspecial: 'Sem data' };
   }
-  if (bruto === undefined || bruto === null || bruto === '') {
-    return { dataObj: null, textoEspecial: 'Não definido' };
+  if (dataBruta === undefined || dataBruta === null || dataBruta === '') {
+    return { dataObj: null, momentoConclusao: null, textoEspecial: 'Não definido' };
   }
-  const d = new Date(bruto + 'T00:00:00');
-  if (isNaN(d.getTime())) {
-    return { dataObj: null, textoEspecial: 'Não definido' };
+
+  const partes = String(dataBruta).split('-').map(Number);
+  if (partes.length !== 3 || partes.some(n => isNaN(n))) {
+    return { dataObj: null, momentoConclusao: null, textoEspecial: 'Não definido' };
   }
-  return { dataObj: d, textoEspecial: null };
+  const [ano, mes, dia] = partes;
+  const dataObj = instanteBrasilia(ano, mes, dia);
+
+  let momentoConclusao;
+  if (horarioBruto) {
+    const [hora, minuto] = String(horarioBruto).split(':').map(Number);
+    momentoConclusao = isNaN(hora)
+      ? instanteBrasilia(ano, mes, dia + 1) // horário mal formatado -> cai no padrão
+      : instanteBrasilia(ano, mes, dia, hora, isNaN(minuto) ? 0 : minuto);
+  } else {
+    // Sem horário definido: conclui à meia-noite do dia seguinte (comportamento padrão, igual a antes)
+    momentoConclusao = instanteBrasilia(ano, mes, dia + 1);
+  }
+
+  return { dataObj, momentoConclusao, textoEspecial: null };
 }
 
 // Recebe uma matéria do JSON e devolve com as avaliações já
 // ordenadas por data (as sem data vão pro final) e com o "status"
 // calculado (concluida / proxima / futura)
 function prepararMateria(materia) {
-  const hoje = hojeSemHora();
-  const limite = new Date(hoje);
-  limite.setDate(limite.getDate() + 7);
+  const agora = new Date();
+  const hoje = hojeBrasilia();
+  const limite = new Date(hoje.getTime() + 7 * 24 * 3600000);
 
   const avaliacoes = materia.avaliacoes
-    .map(a => ({ ...a, ...resolverData(a.data) }))
+    .map(a => ({ ...a, ...resolverData(a.data, a.horario) }))
     .sort((a, b) => {
       if (!a.dataObj && !b.dataObj) return 0;
       if (!a.dataObj) return 1;
@@ -108,8 +138,8 @@ function prepararMateria(materia) {
 
     if (!a.dataObj) {
       a.status = 'futura'; // sem data conhecida -> tratada como card normal
-    } else if (a.dataObj < hoje) {
-      a.status = 'concluida';
+    } else if (agora >= a.momentoConclusao) {
+      a.status = 'concluida'; // já passou do horário de conclusão (ou da meia-noite seguinte, se não houver horário)
     } else if (a.dataObj <= limite) {
       a.status = 'proxima'; // dentro dos próximos 7 dias -> destaque
     } else {
@@ -121,7 +151,7 @@ function prepararMateria(materia) {
 }
 
 function formatarData(dataObj) {
-  return dataObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+  return dataObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', timeZone: FUSO_BRASILIA });
 }
 
 function formatarNumero(n) {
@@ -136,14 +166,10 @@ function textoData(a) {
 
 // ---------- Seção "Próximos 7 dias" ----------
 function renderSemana(materias) {
-  const hoje = hojeSemHora();
-  const limite = new Date(hoje);
-  limite.setDate(limite.getDate() + 7);
-
   const daSemana = [];
   materias.forEach(m => {
     m.avaliacoes.forEach(a => {
-      if (a.dataObj && a.dataObj >= hoje && a.dataObj <= limite) {
+      if (a.status === 'proxima') {
         daSemana.push({ ...a, materiaNome: m.nome, professorNome: m.professor.nome });
       }
     });
